@@ -49,8 +49,6 @@ public class BorrowDAO {
                         , rs.getString("borrow_date_borrow")
                         , rs.getString("borrow_date_return"));
                 borrows.add(b);
-            } else {
-                System.out.println("\nborrow date return isn't null : " + rs.getInt("borrow_id"));
             }
         }
 

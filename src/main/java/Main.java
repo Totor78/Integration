@@ -92,13 +92,13 @@ public class Main {
         AgentDAO aDAO = new AgentDAO();
 
         aDAO.getAgents().forEach(agent -> {
-            System.out.println("agent id : " + agent.getId()
+            System.out.println("\nagent id : " + agent.getId()
                     + "\nagent_name : " + agent.getName()
                     + "\nagent_image : " + agent.getImage());
             try {
-                System.out.println("EQUIPMENTS : \n");
+                System.out.println("\nEQUIPMENTS :");
                 aDAO.getEquipmentsFromAgent(agent.getId()).forEach(equipment ->
-                        System.out.println("equipment_id : " + equipment.getId()
+                        System.out.println("\nequipment_id : " + equipment.getId()
                         + "\nequipment_name : " + equipment.getName()
                         + "\nequipment_quantity : " + equipment.getQuantity()
                         + "\nequipment_is_owned : " + (equipment.isBorrowed() ? "YES" : "NO")));
