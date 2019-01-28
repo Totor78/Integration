@@ -20,7 +20,8 @@ import model.dal.PersistenceManager;
 public class Main {
 
     public static void main(String[] args) throws Exception{
-        //Window wind = new Window("Window");
+
+
         Float similarityThreshold = 70F;
         String sourceImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\test.jpg";
         String targetImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\RemiCastelPRO.jpg";
