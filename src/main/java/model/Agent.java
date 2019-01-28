@@ -1,13 +1,11 @@
 package model;
 
-import javax.swing.*;
-
 public class Agent {
     private int id;
     private String name;
-    private ImageIcon image;
+    private String image;
 
-    public Agent(int id, String name, ImageIcon image) {
+    public Agent(int id, String name, String image) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -21,7 +19,7 @@ public class Agent {
         return name;
     }
 
-    public ImageIcon getImage() {
+    public String getImage() {
         return image;
     }
 }

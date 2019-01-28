@@ -1,7 +1,5 @@
 package model;
 
-import com.sun.org.apache.xpath.internal.operations.String;
-
 public class Borrow {
     private int borrow_id;
     private int agent_id;
