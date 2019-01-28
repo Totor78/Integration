@@ -14,15 +14,19 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import com.amazonaws.util.IOUtils;
+import javafx.application.Application;
+import javafx.stage.Stage;
 import org.bytedeco.javacv.CanvasFrame;
 import model.dal.PersistenceManager;
+
+import javax.swing.*;
 
 public class Main {
 
     public static void main(String[] args) throws Exception{
 
-
-        Float similarityThreshold = 70F;
+        new Interface();
+       /* Float similarityThreshold = 70F;
         String sourceImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\test.jpg";
         String targetImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\RemiCastelPRO.jpg";
         ByteBuffer sourceImageBytes=null;
@@ -77,5 +81,5 @@ public class Main {
                 + " face(s) that did not match");
         System.out.println("Source image rotation: " + compareFacesResult.getSourceImageOrientationCorrection());
         System.out.println("target image rotation: " + compareFacesResult.getTargetImageOrientationCorrection());
-    }
+  */  }
 }
