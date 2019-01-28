@@ -1,6 +1,8 @@
 package model.dal;
 
 import model.Agent;
+import model.Borrow;
+import model.Equipment;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -23,5 +25,21 @@ public class AgentDAO {
             agents.add(a);
         }
         return agents;
+    }
+
+    public List<Equipment> getEquipmentsFromAgent(int agent_id) throws SQLException {
+        List<Borrow> borrows = new BorrowDAO().getBorrowsFromAgent(agent_id);
+        List<Equipment> equipments = new EquipmentDAO().getEquipmentsWithBorrow();
+
+        equipments.forEach(equipment -> {
+            equipment.setBorrowed(false);
+            borrows.forEach(borrow -> {
+                if (borrow.getEquipment_id() == equipment.getId()) {
+                    equipment.setBorrowed(true);
+                }
+            });
+        });
+
+        return equipments;
     }
 }

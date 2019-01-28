@@ -10,8 +10,30 @@ public class BorrowDAO {
     private static final String CREATE_BORROW_QUERY = "INSERT INTO borrow (agent_id, equipment_id, borrow_date_borrow, borrow_date_return) values (?,?,?,?)";
     private static final String SET_BORROW_RETURN_DATE_QUERY = "UPDATE borrow SET borrow_date_return = ? WHERE borrow_id = ?";
     private static final String GET_BORROW_AGENT_QUERY = "SELECT borrow_id, agent_id, equipment_id, borrow_date_borrow, borrow_date_return FROM borrow WHERE agent_id = ?";
+    private static final String GET_BORROWS = "SELECT borrow_id, agent_id, equipment_id, borrow_date_borrow, borrow_date_return FROM borrow";
 
-    public List<Borrow> getBorrowsFromAgent(int agent_id) throws SQLException {
+    List<Borrow> getBorrows() throws SQLException {
+        List<Borrow> borrows = new ArrayList<>();
+
+        Connection connection = PersistenceManager.getConnection();
+        PreparedStatement st = connection.prepareStatement( GET_BORROWS, Statement.RETURN_GENERATED_KEYS );
+
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            if (rs.getString("borrow_date_return") == null) {
+                Borrow b = new Borrow(rs.getInt("borrow_id")
+                        , rs.getInt("agent_id")
+                        , rs.getInt("equipment_id")
+                        , rs.getString("borrow_date_borrow")
+                        , rs.getString("borrow_date_return"));
+                borrows.add(b);
+            }
+        }
+
+        return borrows;
+    }
+
+    List<Borrow> getBorrowsFromAgent(int agent_id) throws SQLException {
         List<Borrow> borrows = new ArrayList<>();
 
         Connection connection = PersistenceManager.getConnection();
@@ -20,12 +42,16 @@ public class BorrowDAO {
 
         ResultSet rs = st.executeQuery();
         while (rs.next()) {
-            Borrow b = new Borrow(rs.getInt("borrow_id")
-                    , rs.getInt("agent_id")
-                    , rs.getInt("equipment_id")
-                    , rs.getString("borrow_date_borrow")
-                    , rs.getString("borrow_date_return"));
-            borrows.add(b);
+            if (rs.getString("borrow_date_return") == null) {
+                Borrow b = new Borrow(rs.getInt("borrow_id")
+                        , rs.getInt("agent_id")
+                        , rs.getInt("equipment_id")
+                        , rs.getString("borrow_date_borrow")
+                        , rs.getString("borrow_date_return"));
+                borrows.add(b);
+            } else {
+                System.out.println("\nborrow date return isn't null : " + rs.getInt("borrow_id"));
+            }
         }
 
         return borrows;

@@ -8,12 +8,18 @@ import com.amazonaws.services.rekognition.model.CompareFacesMatch;
 import com.amazonaws.services.rekognition.model.CompareFacesRequest;
 import com.amazonaws.services.rekognition.model.CompareFacesResult;
 import com.amazonaws.services.rekognition.model.ComparedFace;
+
+import java.sql.SQLException;
 import java.util.List;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import com.amazonaws.util.IOUtils;
+import model.Agent;
+import model.dal.AgentDAO;
+import model.dal.BorrowDAO;
+import model.dal.EquipmentDAO;
 import org.bytedeco.javacv.CanvasFrame;
 import model.dal.PersistenceManager;
 
@@ -21,7 +27,9 @@ public class Main {
 
     public static void main(String[] args) throws Exception{
 
+        TestDb();
 
+        /*
         Float similarityThreshold = 70F;
         String sourceImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\test.jpg";
         String targetImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\RemiCastelPRO.jpg";
@@ -77,5 +85,26 @@ public class Main {
                 + " face(s) that did not match");
         System.out.println("Source image rotation: " + compareFacesResult.getSourceImageOrientationCorrection());
         System.out.println("target image rotation: " + compareFacesResult.getTargetImageOrientationCorrection());
+        */
+    }
+
+    private static void TestDb() throws SQLException {
+        AgentDAO aDAO = new AgentDAO();
+
+        aDAO.getAgents().forEach(agent -> {
+            System.out.println("agent id : " + agent.getId()
+                    + "\nagent_name : " + agent.getName()
+                    + "\nagent_image : " + agent.getImage());
+            try {
+                System.out.println("EQUIPMENTS : \n");
+                aDAO.getEquipmentsFromAgent(agent.getId()).forEach(equipment ->
+                        System.out.println("equipment_id : " + equipment.getId()
+                        + "\nequipment_name : " + equipment.getName()
+                        + "\nequipment_quantity : " + equipment.getQuantity()
+                        + "\nequipment_is_owned : " + (equipment.isBorrowed() ? "YES" : "NO")));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
