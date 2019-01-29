@@ -26,7 +26,7 @@ public class Main {
     public static void main(String[] args) throws Exception{
 
         new Interface();
-       /* Float similarityThreshold = 70F;
+       /*Float similarityThreshold = 70F;
         String sourceImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\test.jpg";
         String targetImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\RemiCastelPRO.jpg";
         ByteBuffer sourceImageBytes=null;
@@ -80,6 +80,6 @@ public class Main {
         System.out.println("There was " + uncompared.size()
                 + " face(s) that did not match");
         System.out.println("Source image rotation: " + compareFacesResult.getSourceImageOrientationCorrection());
-        System.out.println("target image rotation: " + compareFacesResult.getTargetImageOrientationCorrection());
-  */  }
+        System.out.println("target image rotation: " + compareFacesResult.getTargetImageOrientationCorrection());*/
+    }
 }
