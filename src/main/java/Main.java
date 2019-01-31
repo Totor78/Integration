@@ -26,6 +26,8 @@ import org.bytedeco.javacv.CanvasFrame;
 import model.dal.PersistenceManager;
 import view.Camera;
 
+import javax.swing.*;
+
 public class Main {
 
     public static void main(String[] args) throws Exception{
@@ -36,6 +38,8 @@ public class Main {
 
         /*
         Float similarityThreshold = 70F;
+        new Interface();
+       /*Float similarityThreshold = 70F;
         String sourceImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\test.jpg";
         String targetImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\RemiCastelPRO.jpg";
         ByteBuffer sourceImageBytes=null;
@@ -89,27 +93,6 @@ public class Main {
         System.out.println("There was " + uncompared.size()
                 + " face(s) that did not match");
         System.out.println("Source image rotation: " + compareFacesResult.getSourceImageOrientationCorrection());
-        System.out.println("target image rotation: " + compareFacesResult.getTargetImageOrientationCorrection());
-        */
-    }
-
-    private static void TestDb() throws SQLException {
-        AgentDAO aDAO = new AgentDAO();
-
-        aDAO.getAgents().forEach(agent -> {
-            System.out.println("\nagent id : " + agent.getId()
-                    + "\nagent_name : " + agent.getName()
-                    + "\nagent_image : " + agent.getImage());
-            try {
-                System.out.println("\nEQUIPMENTS :");
-                aDAO.getEquipmentsFromAgent(agent.getId()).forEach(equipment ->
-                        System.out.println("\nequipment_id : " + equipment.getId()
-                        + "\nequipment_name : " + equipment.getName()
-                        + "\nequipment_quantity : " + equipment.getQuantity()
-                        + "\nequipment_is_owned : " + (equipment.isBorrowed() ? "YES" : "NO")));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
+        System.out.println("target image rotation: " + compareFacesResult.getTargetImageOrientationCorrection());*/
     }
 }
