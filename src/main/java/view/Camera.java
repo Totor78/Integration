@@ -1,48 +1,42 @@
 package view;
 
-import org.bytedeco.javacpp.opencv_core;
+
+import org.bytedeco.javacv.FFmpegFrameRecorder;
+
 import org.bytedeco.javacv.CanvasFrame;
-import org.bytedeco.javacv.FrameGrabber;
+import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.OpenCVFrameConverter;
-import org.bytedeco.javacv.VideoInputFrameGrabber;
+import org.bytedeco.javacv.OpenCVFrameGrabber;
 
-import static org.bytedeco.javacpp.opencv_core.cvFlip;
-import static org.bytedeco.javacpp.opencv_imgcodecs.cvSaveImage;
+public class Camera {
 
-public class Camera implements Runnable {
-    //final int INTERVAL=1000;///you may use interval
-    opencv_core.IplImage image;
-    CanvasFrame canvas = new CanvasFrame("Web Cam");
-    OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();
-    public Camera() {
-        canvas.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-    }
-    @Override
-    public void run() {
-        FrameGrabber grabber = new VideoInputFrameGrabber(0); // 1 for next camera
-        int i=0;
-        try {
-            grabber.start();
-            opencv_core.IplImage img;
-            while (true) {
-                img = converter.convert(grabber.grab());
-                if (img != null) {
-                    cvFlip(img, img, 1);// l-r = 90_degrees_steps_anti_clockwise
-                    cvSaveImage((i++)+"-aa.jpg", img);
-                    // show image on window
-                    canvas.showImage(grabber.grab());
-                }
-                //Thread.sleep(INTERVAL);
-            }
-        } catch (Exception e) {
+    public static final String FILENAME = "output.mp4";
+
+    public void run() throws Exception {
+        OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
+        grabber.start();
+        Frame grabbedImage = grabber.grab();
+        OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();
+
+        CanvasFrame canvasFrame = new CanvasFrame("Cam");
+        canvasFrame.setCanvasSize(converter.convert(grabbedImage).width(), converter.convert(grabbedImage).height());
+
+        System.out.println("framerate = " + grabber.getFrameRate());
+        grabber.setFrameRate(grabber.getFrameRate());
+        FFmpegFrameRecorder recorder = new FFmpegFrameRecorder(FILENAME,  grabber.getImageWidth(),grabber.getImageHeight());
+
+        recorder.setVideoCodec(13);
+        recorder.setFormat("mp4");
+        recorder.setFrameRate(30);
+        recorder.setVideoBitrate(10 * 1024 * 1024);
+
+        recorder.start();
+        while (canvasFrame.isVisible() && (grabbedImage = grabber.grab()) != null) {
+            canvasFrame.showImage(grabbedImage);
+            recorder.record(grabbedImage);
         }
-    }
-
-
-
-    public static void main(String[] args) {
-        Camera gs = new Camera();
-        Thread th = new Thread(gs);
-        th.start();
+        recorder.stop();
+        grabber.stop();
+        canvasFrame.dispose();
     }
 }
