@@ -9,6 +9,7 @@ import com.amazonaws.services.rekognition.model.CompareFacesRequest;
 import com.amazonaws.services.rekognition.model.CompareFacesResult;
 import com.amazonaws.services.rekognition.model.ComparedFace;
 
+import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
 import java.io.File;
@@ -16,18 +17,22 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import com.amazonaws.util.IOUtils;
+import com.sun.jna.platform.unix.X11;
 import model.Agent;
 import model.dal.AgentDAO;
 import model.dal.BorrowDAO;
 import model.dal.EquipmentDAO;
 import org.bytedeco.javacv.CanvasFrame;
 import model.dal.PersistenceManager;
+import view.Camera;
 
 public class Main {
 
     public static void main(String[] args) throws Exception{
 
-        TestDb();
+        // TestDb();
+
+        Camera gs = new Camera();
 
         /*
         Float similarityThreshold = 70F;
