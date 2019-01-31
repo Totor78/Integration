@@ -12,7 +12,7 @@ public class Main {
         /*
         Float similarityThreshold = 70F;
         new Interface();
-       /*Float similarityThreshold = 70F;
+        Float similarityThreshold = 70F;
         String sourceImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\test.jpg";
         String targetImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\RemiCastelPRO.jpg";
         ByteBuffer sourceImageBytes=null;
