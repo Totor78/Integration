@@ -25,11 +25,12 @@ public class Main {
 
     public static void main(String[] args) throws Exception{
 
-        new Interface();
-        Float similarityThreshold = 70F;
-        String sourceImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\test.jpg";
-        String targetImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\RemiCastelPRO.jpg";
-        ByteBuffer sourceImageBytes=null;
+       // new Interface();
+        new interface_emprunt();
+        //Float similarityThreshold = 70F;
+       // String sourceImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\test.jpg";
+     //   String targetImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\RemiCastelPRO.jpg";
+        /*ByteBuffer sourceImageBytes=null;
         ByteBuffer targetImageBytes=null;
         AmazonRekognition rekognitionClient = AmazonRekognitionClientBuilder.defaultClient();
         //Load source and target images and create input parameters

@@ -1,16 +1,13 @@
 package view;
-
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacv.*;
 import org.bytedeco.javacv.Frame;
-
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-
+import static org.bytedeco.javacpp.opencv_core.IplImage;
 import static org.bytedeco.javacpp.opencv_core.cvFlip;
 import static org.bytedeco.javacpp.opencv_imgcodecs.cvSaveImage;
 
@@ -18,7 +15,7 @@ public class Camera implements MouseListener {
 
     private BufferedImage image;
 
-    public void run() {
+    public Camera() {
         JFrame window = new JFrame("Java t'identifier");
         JButton button = new JButton("S'identifier");
         button.addMouseListener(this);
@@ -91,4 +88,5 @@ public class Camera implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
 }

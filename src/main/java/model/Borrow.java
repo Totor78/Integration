@@ -15,6 +15,7 @@ public class Borrow {
         this.date_return = date_return;
     }
 
+
     public int getBorrow_id() { return borrow_id; }
 
     public int getAgent_id() {
