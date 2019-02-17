@@ -141,18 +141,156 @@ public class interface_emprunt extends JFrame implements ItemListener {
                 if(Mousqueton.isSelected()==true)
                 {
                     Borrow Emprunt = new Borrow(18,1,1,dt.toString(),dt.toString());
+                    BorrowDAO BorrowDao = new BorrowDAO();
+                    try {
+                        BorrowDao.createBorrow(Emprunt);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
                 }
                 else if (Gant.isSelected()== true)
                 {
                     Borrow Emprunt = new Borrow(18,1,2,dt.toString(),dt.toString());
+                    BorrowDAO BorrowDao = new BorrowDAO();
+                    try {
+                        BorrowDao.createBorrow(Emprunt);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
                 }
-                Borrow Emprunt = new Borrow(18,1,2,dt.toString(),dt.toString());
-                BorrowDAO BorrowDao = new BorrowDAO();
-                try {
-                    BorrowDao.createBorrow(Emprunt);
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
+                else if (Ceinture.isSelected()== true)
+                {
+                    Borrow Emprunt = new Borrow(18,1,3,dt.toString(),dt.toString());
+                    BorrowDAO BorrowDao = new BorrowDAO();
+                    try {
+                        BorrowDao.createBorrow(Emprunt);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
                 }
+                else if (Detecteur.isSelected()== true)
+                {
+                    Borrow Emprunt = new Borrow(18,1,4,dt.toString(),dt.toString());
+                    BorrowDAO BorrowDao = new BorrowDAO();
+                    try {
+                        BorrowDao.createBorrow(Emprunt);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                else if (Brassard.isSelected()== true)
+                {
+                    Borrow Emprunt = new Borrow(18,1,5,dt.toString(),dt.toString());
+                    BorrowDAO BorrowDao = new BorrowDAO();
+                    try {
+                        BorrowDao.createBorrow(Emprunt);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                else if (Lampe.isSelected()== true)
+                {
+                    Borrow Emprunt = new Borrow(18,1,6,dt.toString(),dt.toString());
+                    BorrowDAO BorrowDao = new BorrowDAO();
+                    try {
+                        BorrowDao.createBorrow(Emprunt);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                else if (Bandeau.isSelected()== true)
+                {
+                    Borrow Emprunt = new Borrow(18,1,7,dt.toString(),dt.toString());
+                    BorrowDAO BorrowDao = new BorrowDAO();
+                    try {
+                        BorrowDao.createBorrow(Emprunt);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                else if (Gilet.isSelected()== true)
+                {
+                    Borrow Emprunt = new Borrow(18,1,8,dt.toString(),dt.toString());
+                    BorrowDAO BorrowDao = new BorrowDAO();
+                    try {
+                        BorrowDao.createBorrow(Emprunt);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                else if (Chemises.isSelected()== true)
+                {
+                    Borrow Emprunt = new Borrow(18,1,9,dt.toString(),dt.toString());
+                    BorrowDAO BorrowDao = new BorrowDAO();
+                    try {
+                        BorrowDao.createBorrow(Emprunt);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                else if (Chemises.isSelected()== true)
+                {
+                    Borrow Emprunt = new Borrow(18,1,10,dt.toString(),dt.toString());
+                    BorrowDAO BorrowDao = new BorrowDAO();
+                    try {
+                        BorrowDao.createBorrow(Emprunt);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                else if (Blousons.isSelected()== true)
+                {
+                    Borrow Emprunt = new Borrow(18,1,11,dt.toString(),dt.toString());
+                    BorrowDAO BorrowDao = new BorrowDAO();
+                    try {
+                        BorrowDao.createBorrow(Emprunt);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                else if (CoupeVents.isSelected()== true)
+                {
+                    Borrow Emprunt = new Borrow(18,1,12,dt.toString(),dt.toString());
+                    BorrowDAO BorrowDao = new BorrowDAO();
+                    try {
+                        BorrowDao.createBorrow(Emprunt);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                else if (Talkies.isSelected()== true)
+                {
+                    Borrow Emprunt = new Borrow(18,1,13,dt.toString(),dt.toString());
+                    BorrowDAO BorrowDao = new BorrowDAO();
+                    try {
+                        BorrowDao.createBorrow(Emprunt);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                else if (Oreillettes.isSelected()== true)
+                {
+                    Borrow Emprunt = new Borrow(18,1,14,dt.toString(),dt.toString());
+                    BorrowDAO BorrowDao = new BorrowDAO();
+                    try {
+                        BorrowDao.createBorrow(Emprunt);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                else if (Teasers.isSelected()== true)
+                {
+                    Borrow Emprunt = new Borrow(18,1,15,dt.toString(),dt.toString());
+                    BorrowDAO BorrowDao = new BorrowDAO();
+                    try {
+                        BorrowDao.createBorrow(Emprunt);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+
+
+
             }
         });
     }
@@ -160,21 +298,6 @@ public class interface_emprunt extends JFrame implements ItemListener {
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-        Object source = e.getItemSelectable();
 
-       /* if (source == chinButton) {
-            //...make a note of it...
-        } else if (source == glassesButton) {
-            //...make a note of it...
-        } else if (source == hairButton) {
-            //...make a note of it...
-        } else if (source == teethButton) {
-            //...make a note of it...
-        }
-
-        if (e.getStateChange() == ItemEvent.DESELECTED)
-        //...make a note of it...
-    ...
-        updatePicture();*/
     }
 }
