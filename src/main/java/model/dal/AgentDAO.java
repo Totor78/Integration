@@ -27,7 +27,7 @@ public class AgentDAO {
         return agents;
     }
 
-    /*public List<Equipment> getEquipmentsFromAgent(int agent_id) throws SQLException {
+    public List<Equipment> getEquipmentsFromAgent(int agent_id) throws SQLException {
         List<Borrow> borrows = new BorrowDAO().getBorrowsFromAgent(agent_id);
         List<Equipment> equipments = new EquipmentDAO().getEquipmentsWithBorrow();
 
@@ -41,5 +41,5 @@ public class AgentDAO {
         });
 
         return equipments;
-    }*/
+    }
 }

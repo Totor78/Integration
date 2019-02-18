@@ -11,8 +11,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class EquipmentDAO {
 
     private static final String GET_EQUIPMENTS_QUERY = "SELECT equipment_id, equipment_name, equipment_quantity FROM equipment";
-
-    private List<Equipment> getEquipments() throws SQLException {
+    private static final String GET_EQUIPMENT_ID = "SELECT equipment_id FROM equipment WHERE equipment_name = ?";
+    public List<Equipment> getEquipments() throws SQLException {
         List<Equipment> equipments = new ArrayList<>();
 
         Connection connection = PersistenceManager.getConnection();
@@ -62,4 +62,19 @@ public class EquipmentDAO {
 
         return equipmentsToReturn;
     }
+    public int GetEquipmentId(String Nom) throws SQLException
+    {
+        Connection connection = PersistenceManager.getConnection();
+        PreparedStatement st = connection.prepareStatement(GET_EQUIPMENT_ID, Statement.RETURN_GENERATED_KEYS );
+        st.setString(1, Nom);
+        ResultSet rs = st.executeQuery();
+       if(rs.next())
+        {
+            return rs.getInt(0);
+        }
+
+        return 0;
+    }
+
+
 }
