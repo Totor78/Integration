@@ -13,12 +13,12 @@ import java.util.Date;
 public class interface_emprunt extends JFrame implements ItemListener {
      JCheckBox Oreillettes  ;
      JCheckBox Teasers  ;
-    JCheckBox Talkies ;
-    JCheckBox CoupeVents;
-    JCheckBox Blousons ;
-    JCheckBox Chemises  ;
-    JCheckBox Bandeau ;
-    JCheckBox Mousqueton ;
+     JCheckBox Talkies ;
+     JCheckBox CoupeVents;
+     JCheckBox Blousons ;
+     JCheckBox Chemises  ;
+     JCheckBox Bandeau ;
+     JCheckBox Mousqueton ;
      JCheckBox Gant ;
      JCheckBox Ceinture;
      JCheckBox Detecteur ;
@@ -148,7 +148,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                         e1.printStackTrace();
                     }
                 }
-                else if (Gant.isSelected()== true)
+                if (Gant.isSelected()== true)
                 {
                     Borrow Emprunt = new Borrow(18,1,2,dt.toString(),dt.toString());
                     BorrowDAO BorrowDao = new BorrowDAO();
@@ -158,7 +158,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                         e1.printStackTrace();
                     }
                 }
-                else if (Ceinture.isSelected()== true)
+                if (Ceinture.isSelected()== true)
                 {
                     Borrow Emprunt = new Borrow(18,1,3,dt.toString(),dt.toString());
                     BorrowDAO BorrowDao = new BorrowDAO();
@@ -168,7 +168,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                         e1.printStackTrace();
                     }
                 }
-                else if (Detecteur.isSelected()== true)
+                if (Detecteur.isSelected()== true)
                 {
                     Borrow Emprunt = new Borrow(18,1,4,dt.toString(),dt.toString());
                     BorrowDAO BorrowDao = new BorrowDAO();
@@ -178,7 +178,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                         e1.printStackTrace();
                     }
                 }
-                else if (Brassard.isSelected()== true)
+                if (Brassard.isSelected()== true)
                 {
                     Borrow Emprunt = new Borrow(18,1,5,dt.toString(),dt.toString());
                     BorrowDAO BorrowDao = new BorrowDAO();
@@ -188,7 +188,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                         e1.printStackTrace();
                     }
                 }
-                else if (Lampe.isSelected()== true)
+                if (Lampe.isSelected()== true)
                 {
                     Borrow Emprunt = new Borrow(18,1,6,dt.toString(),dt.toString());
                     BorrowDAO BorrowDao = new BorrowDAO();
@@ -198,7 +198,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                         e1.printStackTrace();
                     }
                 }
-                else if (Bandeau.isSelected()== true)
+                if (Bandeau.isSelected()== true)
                 {
                     Borrow Emprunt = new Borrow(18,1,7,dt.toString(),dt.toString());
                     BorrowDAO BorrowDao = new BorrowDAO();
@@ -208,7 +208,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                         e1.printStackTrace();
                     }
                 }
-                else if (Gilet.isSelected()== true)
+                 if (Gilet.isSelected()== true)
                 {
                     Borrow Emprunt = new Borrow(18,1,8,dt.toString(),dt.toString());
                     BorrowDAO BorrowDao = new BorrowDAO();
@@ -218,7 +218,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                         e1.printStackTrace();
                     }
                 }
-                else if (Chemises.isSelected()== true)
+                 if (Chemises.isSelected()== true)
                 {
                     Borrow Emprunt = new Borrow(18,1,9,dt.toString(),dt.toString());
                     BorrowDAO BorrowDao = new BorrowDAO();
@@ -228,7 +228,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                         e1.printStackTrace();
                     }
                 }
-                else if (Chemises.isSelected()== true)
+                if (Chemises.isSelected()== true)
                 {
                     Borrow Emprunt = new Borrow(18,1,10,dt.toString(),dt.toString());
                     BorrowDAO BorrowDao = new BorrowDAO();
@@ -238,7 +238,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                         e1.printStackTrace();
                     }
                 }
-                else if (Blousons.isSelected()== true)
+                 if (Blousons.isSelected()== true)
                 {
                     Borrow Emprunt = new Borrow(18,1,11,dt.toString(),dt.toString());
                     BorrowDAO BorrowDao = new BorrowDAO();
@@ -248,7 +248,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                         e1.printStackTrace();
                     }
                 }
-                else if (CoupeVents.isSelected()== true)
+                 if (CoupeVents.isSelected()== true)
                 {
                     Borrow Emprunt = new Borrow(18,1,12,dt.toString(),dt.toString());
                     BorrowDAO BorrowDao = new BorrowDAO();
@@ -258,7 +258,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                         e1.printStackTrace();
                     }
                 }
-                else if (Talkies.isSelected()== true)
+                 if (Talkies.isSelected()== true)
                 {
                     Borrow Emprunt = new Borrow(18,1,13,dt.toString(),dt.toString());
                     BorrowDAO BorrowDao = new BorrowDAO();
@@ -268,7 +268,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                         e1.printStackTrace();
                     }
                 }
-                else if (Oreillettes.isSelected()== true)
+                 if (Oreillettes.isSelected()== true)
                 {
                     Borrow Emprunt = new Borrow(18,1,14,dt.toString(),dt.toString());
                     BorrowDAO BorrowDao = new BorrowDAO();
@@ -278,7 +278,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                         e1.printStackTrace();
                     }
                 }
-                else if (Teasers.isSelected()== true)
+                if (Teasers.isSelected()== true)
                 {
                     Borrow Emprunt = new Borrow(18,1,15,dt.toString(),dt.toString());
                     BorrowDAO BorrowDao = new BorrowDAO();
