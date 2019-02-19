@@ -60,6 +60,10 @@ public class interface_emprunt extends JFrame implements ItemListener {
                 }
             });
             this.checkBoxes[i] = checkBox;
+            checkBox.setText(checkBox.getText() + " (" + equipments.get(i).getQuantity() + ")");
+            if (equipments.get(i).getQuantity() == 0 && !equipments.get(i).isBorrowed()) {
+                checkBox.setEnabled(false);
+            }
             Integer Id = equipments.get(i).getId();
         }
 
@@ -79,12 +83,10 @@ public class interface_emprunt extends JFrame implements ItemListener {
            java.sql.Date CurrentDate = new java.sql.Date(dt.getTime());
            BorrowDAO BorrowDao = new BorrowDAO();
            for (int j = 0; j < nb; j++) {
-               System.out.println(checkBoxes[j].getText() + " is selected ? " + checkBoxes[j].isSelected());
-
                if (this.checkBoxes[j].isSelected() == true) {
                    Borrow Emprunt = null;
                    try {
-                       Emprunt = new Borrow(1, new EquipmentDAO().GetEquipmentId(this.checkBoxes[j].getText()), dt.toString(), null);
+                       Emprunt = new Borrow(1, new EquipmentDAO().GetEquipmentId(this.checkBoxes[j].getText().split(" ")[0]), dt.toString(), null);
                    } catch (SQLException e1) {
                        e1.printStackTrace();
                    }
@@ -92,7 +94,9 @@ public class interface_emprunt extends JFrame implements ItemListener {
                    int finalJ = j;
                    Borrow finalEmprunt = Emprunt;
                    equipments.forEach(equipment -> {
-                       if (this.checkBoxes[finalJ].getText() == equipment.getName() && !equipment.isBorrowed()) {
+                       String equipmentName = equipment.getName();
+                       String checkboxName = this.checkBoxes[finalJ].getText().split(" ")[0];
+                       if (checkboxName.equals(equipmentName) && !equipment.isBorrowed()) {
                            try {
                                BorrowDao.createBorrow(finalEmprunt);
                            } catch (SQLException e1) {
@@ -103,9 +107,11 @@ public class interface_emprunt extends JFrame implements ItemListener {
                } else {
                    int finalJ = j;
                    equipments.forEach(equipment -> {
-                       if(this.checkBoxes[finalJ].getText() == equipment.getName() && equipment.isBorrowed()) {
+                       String equipmentName = equipment.getName();
+                       String checkboxName = this.checkBoxes[finalJ].getText().split(" ")[0];
+                       if(checkboxName.equals(equipmentName) && equipment.isBorrowed()) {
                            try {
-                               BorrowDao.setBorrowReturnDate(new EquipmentDAO().GetEquipmentId(this.checkBoxes[finalJ].getText()), agent_id);
+                               BorrowDao.setBorrowReturnDate(new EquipmentDAO().GetEquipmentId(equipment.getName()), agent_id);
                            } catch (SQLException e1) {
                                e1.printStackTrace();
                            }
