@@ -75,7 +75,11 @@ public class Camera implements MouseListener {
         cvSaveImage("./Images/capture.jpg", iplImage);
         try {
             int agent_id = new FacesComparisonController().run();
-            new interface_emprunt(this.window, agent_id);
+            if (agent_id != 0) {
+                new interface_emprunt(this.window, agent_id);
+            } else {
+                new FailAgent(this.window);
+            }
             this.run = false;
         } catch (SQLException e1) {
             e1.printStackTrace();
