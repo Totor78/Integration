@@ -1,4 +1,5 @@
 package view;
+import controller.FacesComparisonController;
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacv.*;
 import org.bytedeco.javacv.Frame;
@@ -7,27 +8,28 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import static org.bytedeco.javacpp.opencv_core.IplImage;
+import java.sql.SQLException;
 import static org.bytedeco.javacpp.opencv_core.cvFlip;
 import static org.bytedeco.javacpp.opencv_imgcodecs.cvSaveImage;
 
 public class Camera implements MouseListener {
 
     private BufferedImage image;
+    private boolean run = true;
 
     public Camera() {
         JFrame window = new JFrame("Java t'identifier");
+        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         JButton button = new JButton("S'identifier");
         button.addMouseListener(this);
-        Panel container = new Panel();
+        JPanel container = new JPanel();
+        Panel camContainer = new Panel();
 
-        window.setSize(500, 500);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLocationRelativeTo(null);
-        container.setBackground(Color.white);
-        container.setLayout(new BorderLayout());
-        container.add(button, BorderLayout.SOUTH);
-        window.setContentPane(container);
+        container.add(button);
+        window.add(container, BorderLayout.EAST);
+        window.add(camContainer, BorderLayout.CENTER);
         window.setVisible(true);
 
         OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
@@ -37,7 +39,7 @@ public class Camera implements MouseListener {
         opencv_core.IplImage img;
         try {
             grabber.start();
-            while (true) {
+            while (this.run) {
                 Frame frame = grabber.grab();
 
                 img = converter.convert(frame);
@@ -47,10 +49,16 @@ public class Camera implements MouseListener {
 
                 //save
                 this.image = paintConverter.getBufferedImage(converter.convert(img));
-                container.setImg(this.image);
-                container.updateUI();
+                camContainer.setImg(this.image);
+                camContainer.repaint();
                 //window.showImage(converter.convert(img));
             }
+
+            grabber.stop();
+            camContainer.setImg(null);
+            window.remove(camContainer);
+            window.repaint();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,7 +74,13 @@ public class Camera implements MouseListener {
         OpenCVFrameConverter.ToIplImage iplConverter = new OpenCVFrameConverter.ToIplImage();
         Java2DFrameConverter java2dConverter = new Java2DFrameConverter();
         opencv_core.IplImage iplImage = iplConverter.convert(java2dConverter.convert(this.image));
-        cvSaveImage("capture.jpg",  iplImage);
+        cvSaveImage("./Images/capture.jpg", iplImage);
+        try {
+            new FacesComparisonController().run();
+            this.run = false;
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
     }
 
     @Override

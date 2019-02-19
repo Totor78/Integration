@@ -10,7 +10,8 @@ public class Panel extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(img, 0, 0, this);
+        super.paintComponent(g);
+        g.drawImage(img, 50, 50, this.getWidth(), this.getHeight() - 100, this);
     }
 
     public void setImg(BufferedImage img) {
