@@ -1,5 +1,6 @@
 package view;
 
+import controller.FacesComparisonController;
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacv.*;
 import org.bytedeco.javacv.Frame;
@@ -10,6 +11,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.sql.SQLException;
 
 import static org.bytedeco.javacpp.opencv_core.cvFlip;
 import static org.bytedeco.javacpp.opencv_imgcodecs.cvSaveImage;
@@ -20,11 +22,11 @@ public class Camera implements MouseListener {
 
     public void run() {
         JFrame window = new JFrame("Java t'identifier");
+        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         JButton button = new JButton("S'identifier");
         button.addMouseListener(this);
         Panel container = new Panel();
 
-        window.setSize(500, 500);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLocationRelativeTo(null);
         container.setBackground(Color.white);
@@ -69,7 +71,12 @@ public class Camera implements MouseListener {
         OpenCVFrameConverter.ToIplImage iplConverter = new OpenCVFrameConverter.ToIplImage();
         Java2DFrameConverter java2dConverter = new Java2DFrameConverter();
         opencv_core.IplImage iplImage = iplConverter.convert(java2dConverter.convert(this.image));
-        cvSaveImage("capture.jpg",  iplImage);
+        cvSaveImage("./Images/capture.jpg", iplImage);
+        try {
+            new FacesComparisonController().run();
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
     }
 
     @Override
