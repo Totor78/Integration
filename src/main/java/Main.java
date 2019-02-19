@@ -41,7 +41,8 @@ public class Main {
     public static void main(String[] args) throws Exception{
 
        // new Interface();
-        new interface_emprunt();
+        // new interface_emprunt();
+        new Camera();
         //Float similarityThreshold = 70F;
        // String sourceImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\test.jpg";
      //   String targetImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\RemiCastelPRO.jpg";

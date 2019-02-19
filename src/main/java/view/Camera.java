@@ -15,20 +15,21 @@ import static org.bytedeco.javacpp.opencv_imgcodecs.cvSaveImage;
 public class Camera implements MouseListener {
 
     private BufferedImage image;
+    private boolean run = true;
 
     public Camera() {
         JFrame window = new JFrame("Java t'identifier");
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         JButton button = new JButton("S'identifier");
         button.addMouseListener(this);
-        Panel container = new Panel();
+        JPanel container = new JPanel();
+        Panel camContainer = new Panel();
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLocationRelativeTo(null);
-        container.setBackground(Color.white);
-        container.setLayout(new BorderLayout());
-        container.add(button, BorderLayout.SOUTH);
-        window.setContentPane(container);
+        container.add(button);
+        window.add(container, BorderLayout.EAST);
+        window.add(camContainer, BorderLayout.CENTER);
         window.setVisible(true);
 
         OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
@@ -38,7 +39,7 @@ public class Camera implements MouseListener {
         opencv_core.IplImage img;
         try {
             grabber.start();
-            while (true) {
+            while (this.run) {
                 Frame frame = grabber.grab();
 
                 img = converter.convert(frame);
@@ -48,10 +49,16 @@ public class Camera implements MouseListener {
 
                 //save
                 this.image = paintConverter.getBufferedImage(converter.convert(img));
-                container.setImg(this.image);
-                container.updateUI();
+                camContainer.setImg(this.image);
+                camContainer.repaint();
                 //window.showImage(converter.convert(img));
             }
+
+            grabber.stop();
+            camContainer.setImg(null);
+            window.remove(camContainer);
+            window.repaint();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,6 +77,7 @@ public class Camera implements MouseListener {
         cvSaveImage("./Images/capture.jpg", iplImage);
         try {
             new FacesComparisonController().run();
+            this.run = false;
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
