@@ -33,6 +33,7 @@ import java.nio.ByteBuffer;
 import com.amazonaws.util.IOUtils;
 import org.bytedeco.javacv.CanvasFrame;
 import model.dal.PersistenceManager;
+import view.interface_emprunt;
 
 import javax.swing.*;
 
@@ -41,8 +42,8 @@ public class Main {
     public static void main(String[] args) throws Exception{
 
        // new Interface();
-        // new interface_emprunt();
-        new Camera();
+        new interface_emprunt();
+        // new Camera();
         //Float similarityThreshold = 70F;
        // String sourceImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\test.jpg";
      //   String targetImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\RemiCastelPRO.jpg";

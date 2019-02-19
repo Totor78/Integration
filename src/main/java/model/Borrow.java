@@ -15,6 +15,13 @@ public class Borrow {
         this.date_return = date_return;
     }
 
+    public Borrow(int agent_id, int equipment_id, String date_borrow, String date_return) {
+        this.agent_id = agent_id;
+        this.equipment_id = equipment_id;
+        this.date_borrow = date_borrow;
+        this.date_return = date_return;
+    }
+
 
     public int getBorrow_id() { return borrow_id; }
 

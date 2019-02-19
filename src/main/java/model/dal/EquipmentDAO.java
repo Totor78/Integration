@@ -70,7 +70,7 @@ public class EquipmentDAO {
         ResultSet rs = st.executeQuery();
        if(rs.next())
         {
-            return rs.getInt(0);
+            return rs.getInt("equipment_id");
         }
 
         return 0;

@@ -3,6 +3,7 @@ package view;
 import com.amazonaws.event.DeliveryMode;
 import com.google.api.client.json.Json;
 import model.Borrow;
+import model.Equipment;
 import model.dal.BorrowDAO;
 import model.dal.EquipmentDAO;
 
@@ -12,12 +13,15 @@ import java.awt.event.*;
 import java.io.Console;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 
 public class interface_emprunt extends JFrame implements ItemListener {
 
     static JFrame f;
+    private JCheckBox[] checkBoxes;
     public interface_emprunt() throws SQLException{
 
         f = new JFrame("JavaIdentifier");
@@ -30,19 +34,30 @@ public class interface_emprunt extends JFrame implements ItemListener {
         setIconImage(img);
 
         EquipmentDAO Equipements = new EquipmentDAO();
-        Integer nb= Equipements.getEquipments().size();
+        List<Equipment> equipments = Equipements.getEquipments();
+        Integer nb = equipments.size();
 
-        JCheckBox[] tableau = new JCheckBox[nb];
+        this.checkBoxes = new JCheckBox[nb];
         JPanel container = new JPanel();
         JPanel p = new JPanel();
         JPanel b = new JPanel();
         for(int i=0;i<nb;i++)
         {
             String nom = Equipements.getEquipments().get(i).getName();
-            tableau[i]= new JCheckBox((String)Equipements.getEquipments().get(i).getName(), false);
-            p.add(new Checkbox(nom));
-            tableau[i].setMnemonic(KeyEvent.VK_C);
-            tableau[i].addItemListener(this);
+            JCheckBox checkBox = new JCheckBox((String)Equipements.getEquipments().get(i).getName(), false);
+            p.add(checkBox);
+            checkBox.setMnemonic(KeyEvent.VK_C);
+            checkBox.addItemListener(new ItemListener() {
+                @Override
+                public void itemStateChanged(ItemEvent e) {
+                    System.out.println(checkBox.getText());
+                    if(e.getStateChange() == ItemEvent.SELECTED) {
+                        checkBox.setSelected(true);
+                        System.out.println(checkBox.getText() + " set select " + checkBox.isSelected());
+                    }
+                }
+            });
+            this.checkBoxes[i] = checkBox;
             Integer Id = Equipements.getEquipments().get(i).getId();
         }
 
@@ -57,33 +72,29 @@ public class interface_emprunt extends JFrame implements ItemListener {
         f.add(container);
         f.show();
 
-       b1.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e){
-                Date dt = new Date();
-                java.sql.Date CurrentDate = new java.sql.Date(dt.getTime());
-                BorrowDAO BorrowDao = new BorrowDAO();
-                System.out.println(tableau[1].getName());
-                for (int j = 0; j < nb; j++) {
+       b1.addActionListener(e -> {
+           Date dt = new Date();
+           java.sql.Date CurrentDate = new java.sql.Date(dt.getTime());
+           BorrowDAO BorrowDao = new BorrowDAO();
+           for (int j = 0; j < nb; j++) {
+               System.out.println(checkBoxes[j].getText() + " is selected ? " + checkBoxes[j].isSelected());
 
+               if (this.checkBoxes[j].isSelected() == true) {
+                   Borrow Emprunt = null;
+                   try {
+                       Emprunt = new Borrow(1, Equipements.GetEquipmentId(this.checkBoxes[j].getText()), dt.toString(), null);
+                   } catch (SQLException e1) {
+                       e1.printStackTrace();
+                   }
 
-                    if (tableau[j].isSelected() == true) {
-                        Borrow Emprunt = null;
-                        try {
-                            Emprunt = new Borrow(j, 1, Equipements.GetEquipmentId(tableau[j].toString()), dt.toString(), dt.toString());
-                        } catch (SQLException e1) {
-                            e1.printStackTrace();
-                        }
-
-                        try {
-                            BorrowDao.createBorrow(Emprunt);
-                        } catch (SQLException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
-                }
-            }
-        });
+                   try {
+                       BorrowDao.createBorrow(Emprunt);
+                   } catch (SQLException e1) {
+                       e1.printStackTrace();
+                   }
+               }
+           }
+       });
 
 
    }
