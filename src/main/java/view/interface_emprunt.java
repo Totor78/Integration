@@ -25,16 +25,10 @@ import java.util.List;
 
 public class interface_emprunt extends JFrame implements ItemListener {
 
-    static JFrame f;
     private JCheckBox[] checkBoxes;
-    public interface_emprunt(int agent_id) throws SQLException{
+    public interface_emprunt(JFrame window, int agent_id) throws SQLException{
 
-        f = new JFrame("JavaIdentifier");
-        setDefaultCloseOperation(f.EXIT_ON_CLOSE);
         Toolkit tk = Toolkit.getDefaultToolkit();
-        Dimension d = tk.getScreenSize();
-        int hauteurEcran = d.height;
-        int largeurEcran = d.width;
         Image img = tk.getImage("C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\logo.jpg");
         setIconImage(img);
         AgentDAO Agent = new AgentDAO();
@@ -77,8 +71,6 @@ public class interface_emprunt extends JFrame implements ItemListener {
 
 
         JButton b1 = new JButton("Valider");
-
-        f.setSize(hauteurEcran,largeurEcran );
         container.setLayout(new BoxLayout(container,BoxLayout.PAGE_AXIS));
         b.add(b1);
         Utilisateur.setFont(new Font("Verdana",1,20));
@@ -90,8 +82,9 @@ public class interface_emprunt extends JFrame implements ItemListener {
         JLabel picLabel = new JLabel(new ImageIcon(Portrait));
         Image.add(picLabel);
         container.add(Image);
-        f.add(container);
-        f.show();
+        window.add(container);
+        window.revalidate();
+        window.repaint();
 
        b1.addActionListener(e -> {
            Date dt = new Date();
