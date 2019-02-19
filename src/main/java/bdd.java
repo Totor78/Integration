@@ -4,25 +4,50 @@ import java.sql.SQLException;
 
 public class bdd {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/a_definir?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    private static final String DB_LOGIN = "a_definir";
-    private static final String DB_PWD = "a_definir";
-
+    private String JDBC_DRIVER;
+    private String DB_URL;
+    //Database credentials
+    private String USER;
+    private String PASS;
+    private Connection conn;
     private static Connection connection;
 
-    private bdd() {}
+    public bdd() {
 
-    public static Connection getConnection() throws SQLException {
-        if ( null == connection || connection.isClosed() ) {
-            connection = DriverManager.getConnection( DB_URL, DB_LOGIN, DB_PWD );
+        JDBC_DRIVER = "com.mysql.jdbc.Driver";
+        DB_URL = "jdbc:mysql://localhost/mspr?useUnicode=yes&characterEncoding=UTF-8";
+        USER = "root";
+        PASS = "rootroot";
+        conn = null;
+        openConnection();
+    }
+        public void openConnection(){
+            try {
+                //Register JDBC driver
+                Class.forName(JDBC_DRIVER);
+                //Open a connection
+                System.out.print("Connecting to a selected database... ");
+                conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                System.out.println("Success!");
+            } catch (Exception e) {
+                //Handle errors for JDBC
+                e.printStackTrace();
+            }
+        }
+        public void closeConnection() {
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            System.out.println("Connection closed");
+        }
+        public Connection getConnection() {
+            return conn;
         }
 
-        return connection;
-    }
-
-    public static void closeConnection() throws SQLException {
-        if ( null != connection && !connection.isClosed() ) {
-            connection.close();
-        }
-    }
 }
+
+
+

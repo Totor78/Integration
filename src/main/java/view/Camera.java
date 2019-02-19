@@ -1,18 +1,14 @@
 package view;
-
 import controller.FacesComparisonController;
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacv.*;
 import org.bytedeco.javacv.Frame;
-
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.sql.SQLException;
-
 import static org.bytedeco.javacpp.opencv_core.cvFlip;
 import static org.bytedeco.javacpp.opencv_imgcodecs.cvSaveImage;
 
@@ -20,7 +16,7 @@ public class Camera implements MouseListener {
 
     private BufferedImage image;
 
-    public void run() {
+    public Camera() {
         JFrame window = new JFrame("Java t'identifier");
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         JButton button = new JButton("S'identifier");
@@ -98,4 +94,5 @@ public class Camera implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
 }
