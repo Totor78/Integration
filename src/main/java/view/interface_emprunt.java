@@ -1,6 +1,7 @@
 package view;
 
 import com.amazonaws.event.DeliveryMode;
+import com.amazonaws.services.codecommit.model.File;
 import com.google.api.client.json.Json;
 import model.Borrow;
 import model.Equipment;
@@ -8,9 +9,12 @@ import model.dal.AgentDAO;
 import model.dal.BorrowDAO;
 import model.dal.EquipmentDAO;
 
+import javax.imageio.ImageIO;
+import javax.rmi.CORBA.Util;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.Console;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,6 +31,8 @@ public class interface_emprunt extends JFrame implements ItemListener {
         Toolkit tk = Toolkit.getDefaultToolkit();
         Image img = tk.getImage("C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\logo.jpg");
         setIconImage(img);
+        AgentDAO Agent = new AgentDAO();
+        String Portrait = "./Images/" + Agent.getAgents().get(agent_id).getImage() + ".jpg";
 
         AgentDAO Equipements = new AgentDAO();
         List<Equipment> equipments = Equipements.getEquipmentsFromAgent(agent_id);
@@ -36,6 +42,8 @@ public class interface_emprunt extends JFrame implements ItemListener {
         JPanel container = new JPanel();
         JPanel p = new JPanel();
         JPanel b = new JPanel();
+        JPanel Titre = new JPanel();
+        JLabel Utilisateur = new JLabel("Bonjour " + Agent.GetAgentName(agent_id));
         for(int i=0;i<nb;i++)
         {
             String nom = equipments.get(i).getName();
@@ -65,8 +73,15 @@ public class interface_emprunt extends JFrame implements ItemListener {
         JButton b1 = new JButton("Valider");
         container.setLayout(new BoxLayout(container,BoxLayout.PAGE_AXIS));
         b.add(b1);
+        Utilisateur.setFont(new Font("Verdana",1,20));
+        Titre.add(Utilisateur);
+        container.add(Titre);
         container.add(p);
         container.add(b);
+        Panel Image = new Panel();
+        JLabel picLabel = new JLabel(new ImageIcon(Portrait));
+        Image.add(picLabel);
+        container.add(Image);
         window.add(container);
         window.revalidate();
         window.repaint();
