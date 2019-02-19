@@ -16,21 +16,18 @@ public class Camera implements MouseListener {
 
     private BufferedImage image;
     private boolean run = true;
+    private JFrame window;
 
-    public Camera() {
-        JFrame window = new JFrame("Java t'identifier");
-        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    public Camera(JFrame window) {
+        this.window = window;
         JButton button = new JButton("S'identifier");
         button.addMouseListener(this);
         JPanel container = new JPanel();
         Panel camContainer = new Panel();
-
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setLocationRelativeTo(null);
         container.add(button);
         window.add(container, BorderLayout.EAST);
         window.add(camContainer, BorderLayout.CENTER);
-        window.setVisible(true);
+        window.revalidate();
 
         OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
 
@@ -57,6 +54,7 @@ public class Camera implements MouseListener {
             grabber.stop();
             camContainer.setImg(null);
             window.remove(camContainer);
+            window.remove(container);
             window.repaint();
 
         } catch (Exception e) {
@@ -76,7 +74,8 @@ public class Camera implements MouseListener {
         opencv_core.IplImage iplImage = iplConverter.convert(java2dConverter.convert(this.image));
         cvSaveImage("./Images/capture.jpg", iplImage);
         try {
-            new FacesComparisonController().run();
+            int agent_id = new FacesComparisonController().run();
+            new interface_emprunt(this.window, agent_id);
             this.run = false;
         } catch (SQLException e1) {
             e1.printStackTrace();

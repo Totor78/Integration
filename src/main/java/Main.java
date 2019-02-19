@@ -41,9 +41,14 @@ public class Main {
 
     public static void main(String[] args) throws Exception{
 
+        JFrame window = new JFrame("Java t'identifier");
+        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
+        new Camera(window);
+
        // new Interface();
-        new interface_emprunt(1);
-        // new Camera();
         //Float similarityThreshold = 70F;
        // String sourceImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\test.jpg";
      //   String targetImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\RemiCastelPRO.jpg";

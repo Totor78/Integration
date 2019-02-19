@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class FacesComparisonController {
@@ -19,7 +20,7 @@ public class FacesComparisonController {
     public FacesComparisonController() {
     }
 
-    public void run() throws SQLException {
+    public int run() throws SQLException {
         Float similarityThreshold = 70F;
         AtomicReference<ByteBuffer> sourceImageBytes = new AtomicReference<>();
         String finalSourceImage = "./Images/capture.jpg";
@@ -30,6 +31,7 @@ public class FacesComparisonController {
             System.out.println("Failed to load source image " + finalSourceImage);
             System.exit(1);
         }
+        AtomicInteger agentId = new AtomicInteger();
         new AgentDAO().getAgents().forEach(agent -> {
             String targetImage = "./Images/" + agent.getImage() + ".jpg";
             ByteBuffer targetImageBytes = null;
@@ -65,7 +67,8 @@ public class FacesComparisonController {
                         + " " + position.getTop()
                         + " matches with " + face.getConfidence().toString()
                         + "% confidence.");
-
+                agentId.set(agent.getId());
+                break;
             }
             List<ComparedFace> uncompared = compareFacesResult.getUnmatchedFaces();
 
@@ -74,5 +77,7 @@ public class FacesComparisonController {
             System.out.println("Source image rotation: " + compareFacesResult.getSourceImageOrientationCorrection());
             System.out.println("target image rotation: " + compareFacesResult.getTargetImageOrientationCorrection());
         });
+        System.out.println(agentId.intValue());
+        return agentId.intValue();
     }
 }
