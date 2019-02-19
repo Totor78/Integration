@@ -4,6 +4,7 @@ import com.amazonaws.event.DeliveryMode;
 import com.google.api.client.json.Json;
 import model.Borrow;
 import model.Equipment;
+import model.dal.AgentDAO;
 import model.dal.BorrowDAO;
 import model.dal.EquipmentDAO;
 
@@ -22,7 +23,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
 
     static JFrame f;
     private JCheckBox[] checkBoxes;
-    public interface_emprunt() throws SQLException{
+    public interface_emprunt(int agent_id) throws SQLException{
 
         f = new JFrame("JavaIdentifier");
         setDefaultCloseOperation(f.EXIT_ON_CLOSE);
@@ -33,8 +34,8 @@ public class interface_emprunt extends JFrame implements ItemListener {
         Image img = tk.getImage("C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\logo.jpg");
         setIconImage(img);
 
-        EquipmentDAO Equipements = new EquipmentDAO();
-        List<Equipment> equipments = Equipements.getEquipments();
+        AgentDAO Equipements = new AgentDAO();
+        List<Equipment> equipments = Equipements.getEquipmentsFromAgent(agent_id);
         Integer nb = equipments.size();
 
         this.checkBoxes = new JCheckBox[nb];
@@ -43,8 +44,9 @@ public class interface_emprunt extends JFrame implements ItemListener {
         JPanel b = new JPanel();
         for(int i=0;i<nb;i++)
         {
-            String nom = Equipements.getEquipments().get(i).getName();
-            JCheckBox checkBox = new JCheckBox((String)Equipements.getEquipments().get(i).getName(), false);
+            String nom = equipments.get(i).getName();
+            boolean selected = equipments.get(i).isBorrowed();
+            JCheckBox checkBox = new JCheckBox((String)equipments.get(i).getName(), selected);
             p.add(checkBox);
             checkBox.setMnemonic(KeyEvent.VK_C);
             checkBox.addItemListener(new ItemListener() {
@@ -58,7 +60,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                 }
             });
             this.checkBoxes[i] = checkBox;
-            Integer Id = Equipements.getEquipments().get(i).getId();
+            Integer Id = equipments.get(i).getId();
         }
 
 
@@ -82,16 +84,33 @@ public class interface_emprunt extends JFrame implements ItemListener {
                if (this.checkBoxes[j].isSelected() == true) {
                    Borrow Emprunt = null;
                    try {
-                       Emprunt = new Borrow(1, Equipements.GetEquipmentId(this.checkBoxes[j].getText()), dt.toString(), null);
+                       Emprunt = new Borrow(1, new EquipmentDAO().GetEquipmentId(this.checkBoxes[j].getText()), dt.toString(), null);
                    } catch (SQLException e1) {
                        e1.printStackTrace();
                    }
 
-                   try {
-                       BorrowDao.createBorrow(Emprunt);
-                   } catch (SQLException e1) {
-                       e1.printStackTrace();
-                   }
+                   int finalJ = j;
+                   Borrow finalEmprunt = Emprunt;
+                   equipments.forEach(equipment -> {
+                       if (this.checkBoxes[finalJ].getText() == equipment.getName() && !equipment.isBorrowed()) {
+                           try {
+                               BorrowDao.createBorrow(finalEmprunt);
+                           } catch (SQLException e1) {
+                               e1.printStackTrace();
+                           }
+                       }
+                   });
+               } else {
+                   int finalJ = j;
+                   equipments.forEach(equipment -> {
+                       if(this.checkBoxes[finalJ].getText() == equipment.getName() && equipment.isBorrowed()) {
+                           try {
+                               BorrowDao.setBorrowReturnDate(new EquipmentDAO().GetEquipmentId(this.checkBoxes[finalJ].getText()), agent_id);
+                           } catch (SQLException e1) {
+                               e1.printStackTrace();
+                           }
+                       }
+                   });
                }
            }
        });

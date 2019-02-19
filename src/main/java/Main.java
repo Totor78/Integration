@@ -42,7 +42,7 @@ public class Main {
     public static void main(String[] args) throws Exception{
 
        // new Interface();
-        new interface_emprunt();
+        new interface_emprunt(1);
         // new Camera();
         //Float similarityThreshold = 70F;
        // String sourceImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\test.jpg";

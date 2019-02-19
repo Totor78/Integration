@@ -10,6 +10,7 @@ public class BorrowDAO {
     private static final String CREATE_BORROW_QUERY = "INSERT INTO borrow (agent_id, equipment_id, borrow_date_borrow, borrow_date_return) values (?,?,?,?)";
     private static final String SET_BORROW_RETURN_DATE_QUERY = "UPDATE borrow SET borrow_date_return = ? WHERE borrow_id = ?";
     private static final String GET_BORROW_AGENT_QUERY = "SELECT borrow_id, agent_id, equipment_id, borrow_date_borrow, borrow_date_return FROM borrow WHERE agent_id = ?";
+    private static final String GET_BORROW_FROM_EQUIPMENT_AGENT = "SELECT borrow_id FROM borrow WHERE agent_id = ? AND equipment_id = ?";
     private static final String GET_BORROWS = "SELECT borrow_id, agent_id, equipment_id, borrow_date_borrow, borrow_date_return FROM borrow";
 
     List<Borrow> getBorrows() throws SQLException {
@@ -68,12 +69,22 @@ public class BorrowDAO {
         System.out.println(st);
     }
 
-    public void setBorrowReturnDate(Borrow b) throws SQLException {
+    public void setBorrowReturnDate(int equipmentId, int agentId) throws SQLException {
         java.util.Date utilDate = new java.util.Date();
         Connection connection = PersistenceManager.getConnection();
-        PreparedStatement st = connection.prepareStatement( SET_BORROW_RETURN_DATE_QUERY, Statement.RETURN_GENERATED_KEYS );
+        PreparedStatement st = connection.prepareStatement( GET_BORROW_FROM_EQUIPMENT_AGENT, Statement.RETURN_GENERATED_KEYS );
+        st.setInt(1, agentId);
+        st.setInt(2, equipmentId);
+
+        ResultSet rs = st.executeQuery();
+        int borrowId = 0;
+        while (rs.next()) {
+            borrowId = rs.getInt("borrow_id");
+        }
+
+        st = connection.prepareStatement( SET_BORROW_RETURN_DATE_QUERY, Statement.RETURN_GENERATED_KEYS );
         st.setDate(1, new java.sql.Date(utilDate.getTime()));
-        st.setInt(2, b.getBorrow_id());
+        st.setInt(2, borrowId);
         st.executeUpdate();
     }
 }
