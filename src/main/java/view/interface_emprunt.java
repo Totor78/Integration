@@ -1,26 +1,19 @@
 package view;
 
-import com.amazonaws.event.DeliveryMode;
-import com.amazonaws.services.codecommit.model.File;
-import com.google.api.client.json.Json;
+import model.Agent;
 import model.Borrow;
 import model.Equipment;
 import model.dal.AgentDAO;
 import model.dal.BorrowDAO;
 import model.dal.EquipmentDAO;
 
-import javax.imageio.ImageIO;
-import javax.rmi.CORBA.Util;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.Console;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 public class interface_emprunt extends JFrame implements ItemListener {
@@ -32,7 +25,15 @@ public class interface_emprunt extends JFrame implements ItemListener {
         Image img = tk.getImage("C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\logo.jpg");
         setIconImage(img);
         AgentDAO Agent = new AgentDAO();
-        String Portrait = "./Images/" + Agent.getAgents().get(agent_id).getImage() + ".jpg";
+        List<model.Agent> agents = Agent.getAgents();
+        AtomicReference<model.Agent> agent = new AtomicReference<>();
+        agents.forEach(ag -> {
+            if (ag.getId() == agent_id) {
+                agent.set(ag);
+            }
+        });
+
+        String Portrait = "./Images/" + agent.get().getImage() + ".jpg";
 
         AgentDAO Equipements = new AgentDAO();
         List<Equipment> equipments = Equipements.getEquipmentsFromAgent(agent_id);
@@ -47,6 +48,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
         for(int i=0;i<nb;i++)
         {
             String nom = equipments.get(i).getName();
+            System.out.println(equipments.get(i).getName() + " is borrowed " + equipments.get(i).isBorrowed());
             boolean selected = equipments.get(i).isBorrowed();
             JCheckBox checkBox = new JCheckBox((String)equipments.get(i).getName(), selected);
             p.add(checkBox);
@@ -90,11 +92,12 @@ public class interface_emprunt extends JFrame implements ItemListener {
            Date dt = new Date();
            java.sql.Date CurrentDate = new java.sql.Date(dt.getTime());
            BorrowDAO BorrowDao = new BorrowDAO();
+           System.out.println(agent_id);
            for (int j = 0; j < nb; j++) {
                if (this.checkBoxes[j].isSelected() == true) {
                    Borrow Emprunt = null;
                    try {
-                       Emprunt = new Borrow(1, new EquipmentDAO().GetEquipmentId(this.checkBoxes[j].getText().split(" ")[0]), dt.toString(), null);
+                       Emprunt = new Borrow(agent_id, new EquipmentDAO().GetEquipmentId(this.checkBoxes[j].getText().split(" ")[0]), dt.toString(), null);
                    } catch (SQLException e1) {
                        e1.printStackTrace();
                    }

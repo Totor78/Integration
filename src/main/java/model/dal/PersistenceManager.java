@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class PersistenceManager {
 
-    private static final String DB_URL = "jdbc:mariadb://127.0.0.1:3307/mspr?user=root&password=rootroot";
+    private static final String DB_URL = "jdbc:mariadb://127.0.0.1:3307/mspr?user=root&password=";
 
     private static Connection connection;
 
