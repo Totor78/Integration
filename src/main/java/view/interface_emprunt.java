@@ -10,20 +10,24 @@ import model.dal.EquipmentDAO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static com.sun.imageio.plugins.jpeg.JPEG.JPG;
+import static java.awt.Color.HSBtoRGB;
+
 
 public class interface_emprunt extends JFrame implements ItemListener {
 
     private JCheckBox[] checkBoxes;
-    public interface_emprunt(JFrame window, int agent_id, Camera cam) throws SQLException{
+    public interface_emprunt(JFrame window, int agent_id,  Camera cam) throws SQLException{
 
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Image img = tk.getImage("C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\logo.jpg");
-        setIconImage(img);
+
+
+        this.setIconImage(new ImageIcon("./Images/logo.jpg").getImage());
         AgentDAO Agent = new AgentDAO();
         List<model.Agent> agents = Agent.getAgents();
         AtomicReference<model.Agent> agent = new AtomicReference<>();
@@ -41,7 +45,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
 
         this.checkBoxes = new JCheckBox[nb];
         JPanel container = new JPanel();
-        JPanel p = new JPanel();
+        JPanel p = new JPanel(new GridLayout(2,1));
         JPanel b = new JPanel();
         JPanel Titre = new JPanel();
         JLabel Utilisateur = new JLabel("Bonjour " + Agent.GetAgentName(agent_id));
@@ -51,6 +55,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
             System.out.println(equipments.get(i).getName() + " is borrowed " + equipments.get(i).isBorrowed());
             boolean selected = equipments.get(i).isBorrowed();
             JCheckBox checkBox = new JCheckBox((String)equipments.get(i).getName(), selected);
+            checkBox.setFont(new Font("Roboto",1,12));
             p.add(checkBox);
             checkBox.setMnemonic(KeyEvent.VK_C);
             checkBox.addItemListener(new ItemListener() {
@@ -71,21 +76,28 @@ public class interface_emprunt extends JFrame implements ItemListener {
             Integer Id = equipments.get(i).getId();
         }
 
+        Panel Image1 = new Panel();
 
+        ImageIcon imageIcon = new ImageIcon(Portrait);
+        Image image = imageIcon.getImage();
+        Image newimg = image.getScaledInstance(300, 200,  java.awt.Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(newimg);
+        JLabel picLabel = new JLabel(imageIcon);
+        Image1.add(picLabel);
         JButton b1 = new JButton("Valider");
         JButton b2 = new JButton("Se déconnecter");
+        b1.setForeground(new Color(55,158,193));
+        b2.setForeground(new Color(55,158,193));
         container.setLayout(new BoxLayout(container,BoxLayout.PAGE_AXIS));
         b.add(b1);
         b.add(b2);
-        Utilisateur.setFont(new Font("Verdana",1,20));
+        Utilisateur.setFont(new Font("Roboto",1,25));
+        Utilisateur.setForeground(new Color(55,158,193));
         Titre.add(Utilisateur);
         container.add(Titre);
+        container.add(Image1);
         container.add(p);
         container.add(b);
-        Panel Image = new Panel();
-        JLabel picLabel = new JLabel(new ImageIcon(Portrait));
-        Image.add(picLabel);
-        container.add(Image);
         window.add(container);
         window.revalidate();
         window.repaint();
