@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class interface_emprunt extends JFrame implements ItemListener {
 
     private JCheckBox[] checkBoxes;
-    public interface_emprunt(JFrame window, int agent_id) throws SQLException{
+    public interface_emprunt(JFrame window, int agent_id, Camera cam) throws SQLException{
 
         Toolkit tk = Toolkit.getDefaultToolkit();
         Image img = tk.getImage("C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\logo.jpg");
@@ -73,8 +73,10 @@ public class interface_emprunt extends JFrame implements ItemListener {
 
 
         JButton b1 = new JButton("Valider");
+        JButton b2 = new JButton("Se déconnecter");
         container.setLayout(new BoxLayout(container,BoxLayout.PAGE_AXIS));
         b.add(b1);
+        b.add(b2);
         Utilisateur.setFont(new Font("Verdana",1,20));
         Titre.add(Utilisateur);
         container.add(Titre);
@@ -130,6 +132,13 @@ public class interface_emprunt extends JFrame implements ItemListener {
                    });
                }
            }
+       });
+
+       b2.addActionListener(e -> {
+           window.remove(container);
+           window.repaint();
+           window.revalidate();
+           cam.run();
        });
 
 

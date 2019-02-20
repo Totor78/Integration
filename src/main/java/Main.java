@@ -46,7 +46,8 @@ public class Main {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-        new Camera(window);
+        Camera cam = new Camera(window);
+        cam.run();
 
        // new Interface();
         //Float similarityThreshold = 70F;
