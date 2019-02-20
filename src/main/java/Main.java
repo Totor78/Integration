@@ -48,6 +48,7 @@ public class Main {
         window.setVisible(true);
         new Camera(window);
 
+
        // new Interface();
         //Float similarityThreshold = 70F;
        // String sourceImage = "C:\\Users\\Remi-\\IdeaProjects\\API\\Images\\test.jpg";

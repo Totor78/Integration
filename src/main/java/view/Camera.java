@@ -78,7 +78,10 @@ public class Camera implements MouseListener {
             if (agent_id != 0) {
                 new interface_emprunt(this.window, agent_id);
             } else {
-                new FailAgent(this.window);
+                        JOptionPane.showMessageDialog(window,
+                        "Agent inconnu, réessayez!",
+                        "Erreur",
+                        JOptionPane.ERROR_MESSAGE);
             }
             this.run = false;
         } catch (SQLException e1) {

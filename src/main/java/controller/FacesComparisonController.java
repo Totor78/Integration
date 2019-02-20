@@ -70,10 +70,9 @@ public class FacesComparisonController {
                 agentId.set(agent.getId());
                 break;
             }
-            List<ComparedFace> uncompared = compareFacesResult.getUnmatchedFaces();
 
-            System.out.println("There was " + uncompared.size()
-                    + " face(s) that did not match");
+            List<ComparedFace> uncompared = compareFacesResult.getUnmatchedFaces();
+            System.out.println("There was " + uncompared.size() + " face(s) that did not match");
             System.out.println("Source image rotation: " + compareFacesResult.getSourceImageOrientationCorrection());
             System.out.println("target image rotation: " + compareFacesResult.getTargetImageOrientationCorrection());
         });
