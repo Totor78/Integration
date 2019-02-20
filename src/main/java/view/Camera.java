@@ -29,6 +29,8 @@ public class Camera implements MouseListener {
         this.window = window;
         this.run = true;
         JButton button = new JButton("S'identifier");
+        button.setFont(new Font("Roboto",1,25));
+        button.setForeground(new Color(55,158,193));
         button.addMouseListener(this);
         this.container = new JPanel();
         this.camContainer = new Panel();

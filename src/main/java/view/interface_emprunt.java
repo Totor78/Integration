@@ -87,6 +87,8 @@ public class interface_emprunt extends JFrame implements ItemListener {
         JButton b1 = new JButton("Valider");
         JButton b2 = new JButton("Se déconnecter");
         b1.setForeground(new Color(55,158,193));
+        b1.setFont(new Font("Roboto",1,25));
+        b2.setFont(new Font("Roboto",1,25));
         b2.setForeground(new Color(55,158,193));
         container.setLayout(new BoxLayout(container,BoxLayout.PAGE_AXIS));
         b.add(b1);
