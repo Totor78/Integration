@@ -82,6 +82,10 @@ public class Camera implements MouseListener {
         try {
             int agent_id = new FacesComparisonController().run();
             if (agent_id != 0) {
+                this.run = false;
+                window.remove(camContainer);
+                window.remove(container);
+                window.repaint();
                 new interface_emprunt(this.window, agent_id, this);
             } else {
                         JOptionPane.showMessageDialog(window,
@@ -89,10 +93,6 @@ public class Camera implements MouseListener {
                         "Erreur",
                         JOptionPane.ERROR_MESSAGE);
             }
-            this.run = false;
-            window.remove(camContainer);
-            window.remove(container);
-            window.repaint();
         } catch (SQLException e1) {
             e1.printStackTrace();
         }

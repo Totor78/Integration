@@ -55,26 +55,29 @@ public class FacesComparisonController {
                     .withSimilarityThreshold(similarityThreshold);
 
             // Call operation
-            CompareFacesResult compareFacesResult = rekognitionClient.compareFaces(request);
+            System.out.println(request);
+            try {
+                CompareFacesResult compareFacesResult = rekognitionClient.compareFaces(request);
+                // Display results
+                List<CompareFacesMatch> faceDetails = compareFacesResult.getFaceMatches();
+                for (CompareFacesMatch match : faceDetails) {
+                    ComparedFace face = match.getFace();
+                    BoundingBox position = face.getBoundingBox();
+                    System.out.println("Face at " + position.getLeft().toString()
+                            + " " + position.getTop()
+                            + " matches with " + face.getConfidence().toString()
+                            + "% confidence.");
+                    agentId.set(agent.getId());
+                    break;
+                }
 
-
-            // Display results
-            List<CompareFacesMatch> faceDetails = compareFacesResult.getFaceMatches();
-            for (CompareFacesMatch match : faceDetails) {
-                ComparedFace face = match.getFace();
-                BoundingBox position = face.getBoundingBox();
-                System.out.println("Face at " + position.getLeft().toString()
-                        + " " + position.getTop()
-                        + " matches with " + face.getConfidence().toString()
-                        + "% confidence.");
-                agentId.set(agent.getId());
-                break;
+                List<ComparedFace> uncompared = compareFacesResult.getUnmatchedFaces();
+                System.out.println("There was " + uncompared.size() + " face(s) that did not match");
+                System.out.println("Source image rotation: " + compareFacesResult.getSourceImageOrientationCorrection());
+                System.out.println("target image rotation: " + compareFacesResult.getTargetImageOrientationCorrection());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-            List<ComparedFace> uncompared = compareFacesResult.getUnmatchedFaces();
-            System.out.println("There was " + uncompared.size() + " face(s) that did not match");
-            System.out.println("Source image rotation: " + compareFacesResult.getSourceImageOrientationCorrection());
-            System.out.println("target image rotation: " + compareFacesResult.getTargetImageOrientationCorrection());
         });
         System.out.println(agentId.intValue());
         return agentId.intValue();
