@@ -16,10 +16,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static com.sun.imageio.plugins.jpeg.JPEG.JPG;
-import static java.awt.Color.HSBtoRGB;
-
-
 public class interface_emprunt extends JFrame implements ItemListener {
 
     private JCheckBox[] checkBoxes;
@@ -41,6 +37,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
 
         AgentDAO Equipements = new AgentDAO();
         List<Equipment> equipments = Equipements.getEquipmentsFromAgent(agent_id);
+        System.out.println("Agent id = " + agent_id);
         Integer nb = equipments.size();
 
         this.checkBoxes = new JCheckBox[nb];
@@ -69,7 +66,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                 }
             });
             this.checkBoxes[i] = checkBox;
-            checkBox.setText(checkBox.getText() + " (" + equipments.get(i).getQuantity() + ")");
+            checkBox.setText(checkBox.getText() + " - (" + equipments.get(i).getQuantity() + ")");
             if (equipments.get(i).getQuantity() == 0 && !equipments.get(i).isBorrowed()) {
                 checkBox.setEnabled(false);
             }
@@ -108,12 +105,12 @@ public class interface_emprunt extends JFrame implements ItemListener {
            Date dt = new Date();
            java.sql.Date CurrentDate = new java.sql.Date(dt.getTime());
            BorrowDAO BorrowDao = new BorrowDAO();
-           System.out.println(agent_id);
+           System.out.println("agent id : " + agent_id);
            for (int j = 0; j < nb; j++) {
                if (this.checkBoxes[j].isSelected() == true) {
                    Borrow Emprunt = null;
                    try {
-                       Emprunt = new Borrow(agent_id, new EquipmentDAO().GetEquipmentId(this.checkBoxes[j].getText().split(" ")[0]), dt.toString(), null);
+                       Emprunt = new Borrow(agent_id, new EquipmentDAO().GetEquipmentId(this.checkBoxes[j].getText().split(" - ")[0]), dt.toString(), null);
                    } catch (SQLException e1) {
                        e1.printStackTrace();
                    }
@@ -122,9 +119,15 @@ public class interface_emprunt extends JFrame implements ItemListener {
                    Borrow finalEmprunt = Emprunt;
                    equipments.forEach(equipment -> {
                        String equipmentName = equipment.getName();
-                       String checkboxName = this.checkBoxes[finalJ].getText().split(" ")[0];
+                       String checkboxName = this.checkBoxes[finalJ].getText().split(" - ")[0];
+                       int quantity = Integer.parseInt((this.checkBoxes[finalJ].getText().split(" - \\(")[1]).split("\\)")[0]);
+                       System.out.println(quantity);
+                       System.out.println(checkboxName);
                        if (checkboxName.equals(equipmentName) && !equipment.isBorrowed()) {
+                           this.checkBoxes[finalJ].setText(equipmentName + " - (" + (quantity - 1) + ")");
+                           equipment.setBorrowed(true);
                            try {
+                               System.out.println("create borrow : " + equipmentName);
                                BorrowDao.createBorrow(finalEmprunt);
                            } catch (SQLException e1) {
                                e1.printStackTrace();
@@ -135,8 +138,12 @@ public class interface_emprunt extends JFrame implements ItemListener {
                    int finalJ = j;
                    equipments.forEach(equipment -> {
                        String equipmentName = equipment.getName();
-                       String checkboxName = this.checkBoxes[finalJ].getText().split(" ")[0];
+                       String checkboxName = this.checkBoxes[finalJ].getText().split(" - ")[0];
+                       int quantity = Integer.parseInt((this.checkBoxes[finalJ].getText().split(" - \\(")[1]).split("\\)")[0]);
+                       System.out.println(quantity);
                        if(checkboxName.equals(equipmentName) && equipment.isBorrowed()) {
+                           this.checkBoxes[finalJ].setText(equipmentName + " - (" + (quantity + 1) + ")");
+                           equipment.setBorrowed(false);
                            try {
                                BorrowDao.setBorrowReturnDate(new EquipmentDAO().GetEquipmentId(equipment.getName()), agent_id);
                            } catch (SQLException e1) {
@@ -146,6 +153,7 @@ public class interface_emprunt extends JFrame implements ItemListener {
                    });
                }
            }
+
        });
 
        b2.addActionListener(e -> {
