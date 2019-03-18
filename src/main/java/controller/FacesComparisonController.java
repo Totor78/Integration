@@ -21,7 +21,7 @@ public class FacesComparisonController {
     }
 
     public int run() throws SQLException {
-        Float similarityThreshold = 70F;
+        Float similarityThreshold = 60F;
         AtomicReference<ByteBuffer> sourceImageBytes = new AtomicReference<>();
         String finalSourceImage = "./Images/capture.jpg";
         try (InputStream inputStream = new FileInputStream(new File(finalSourceImage))) {
