@@ -25,7 +25,7 @@ public class AgentDAO {
 
             agents.add(a);
         }
-	// sout rien
+	// sout rien tamere
         return agents;
     }
 
