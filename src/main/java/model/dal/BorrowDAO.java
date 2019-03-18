@@ -13,7 +13,8 @@ public class BorrowDAO {
     private static final String GET_BORROW_FROM_EQUIPMENT_AGENT = "SELECT borrow_id FROM borrow WHERE agent_id = ? AND equipment_id = ?";
     private static final String GET_BORROWS = "SELECT borrow_id, agent_id, equipment_id, borrow_date_borrow, borrow_date_return FROM borrow";
 
-    List<Borrow> getBorrows() throws SQLException {
+
+    public List<Borrow> getBorrows() throws SQLException {
         List<Borrow> borrows = new ArrayList<>();
 
         Connection connection = PersistenceManager.getConnection();

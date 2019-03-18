@@ -1,17 +1,21 @@
 package model.dal;
 
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class PersistenceManager {
 
-    private static final String DB_URL = "jdbc:mariadb://127.0.0.1:3307/mspr?user=root&password=";
+    private static final String DB_URL = "jdbc:mariadb://127.0.0.1:3307/mspr?user=root&password="+System.getenv("BDDMDP");
 
     private static Connection connection;
 
-    private PersistenceManager() {}
-  
+    public PersistenceManager() {
+        System.out.println(DB_URL);
+
+    }
+
     static Connection getConnection() throws SQLException {
         if ( null == connection || connection.isClosed() ) {
             connection = DriverManager.getConnection( DB_URL );

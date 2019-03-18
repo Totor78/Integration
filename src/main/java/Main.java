@@ -41,6 +41,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception{
 
+        PersistenceManager m = new PersistenceManager();
         JFrame window = new JFrame("Java t'identifier");
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
