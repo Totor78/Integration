@@ -41,6 +41,7 @@ public class AgentDAO {
             });
         });
 
+
         return equipments;
     }
     public String GetAgentName(Integer Id) throws SQLException
