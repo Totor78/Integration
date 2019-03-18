@@ -25,6 +25,7 @@ public class AgentDAO {
 
             agents.add(a);
         }
+	// sout
         return agents;
     }
 
