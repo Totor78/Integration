@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.nio.BufferUnderflowException;
 import java.sql.SQLException;
 import static org.bytedeco.javacpp.opencv_core.cvFlip;
 import static org.bytedeco.javacpp.opencv_imgcodecs.cvSaveImage;
@@ -30,7 +31,7 @@ public class Camera implements MouseListener {
         this.run = true;
         JButton button = new JButton("S'identifier");
         button.setFont(new Font("Roboto",1,25));
-        button.setForeground(new Color(55,158,193));
+        button.setBackground(new Color(55,158,193));
         button.addMouseListener(this);
         this.container = new JPanel();
         this.camContainer = new Panel();
@@ -61,9 +62,13 @@ public class Camera implements MouseListener {
                 cvFlip(img, img, 1);// l-r = 90_degrees_steps_anti_clockwise
 
                 //save
-                this.image = paintConverter.getBufferedImage(converter.convert(img));
-                camContainer.setImg(this.image);
-                camContainer.repaint();
+                try {
+                    this.image = paintConverter.getBufferedImage(converter.convert(img));
+                    camContainer.setImg(this.image);
+                    camContainer.repaint();
+                } catch (BufferUnderflowException e) {
+                    e.printStackTrace();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

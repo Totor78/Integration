@@ -1,0 +1,186 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_IN_PAGE_ERROR (0xc0000006) at pc=0x00007fff6565cef9, pid=12836, tid=8200
+#
+# JRE version:  (11.0.1+13) (build )
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (11.0.1+13-LTS, mixed mode, aot, sharing, tiered, compressed oops, g1 gc, windows-amd64)
+# Problematic frame:
+# C  [vcruntime140.dll+0xcef9]
+#
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.2.2\lib\idea_rt.jar=54574:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.2.2\bin -Dfile.encoding=UTF-8 Main
+
+Host: Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz, 12 cores, 7G,  Windows 10 , 64 bit Build 17134 (10.0.17134.556)
+Time: Mon Feb 25 17:29:49 2019 Paris, Madrid elapsed time: 0 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread is native thread
+
+Stack: [0x000000221c100000,0x000000221c200000],  sp=0x000000221c1ff4e8,  free space=1021k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [vcruntime140.dll+0xcef9]
+V  [jvm.dll+0x666840]
+V  [jvm.dll+0x665737]
+V  [jvm.dll+0x66512e]
+V  [jvm.dll+0x3753a2]
+V  [jvm.dll+0x739346]
+V  [jvm.dll+0x3e467d]
+V  [jvm.dll+0x3e6951]
+C  [java.exe+0x3603]
+C  [java.exe+0x178dc]
+C  [KERNEL32.DLL+0x13dc4]
+C  [ntdll.dll+0x73691]
+
+
+siginfo: EXCEPTION_IN_PAGE_ERROR (0xc0000006), writing address 0x0000020632930000
+
+
+Registers:
+RAX=0x0000000000000000, RBX=0x0000020632930000, RCX=0x0000000000010000, RDX=0x000002063298bc00
+RSP=0x000000221c1ff4e8, RBP=0x000002063297a060, RSI=0x0000020632c58bd0, RDI=0x0000020632930000
+R8 =0x0000000000010000, R9 =0x0000000000000000, R10=0x0000000000000000, R11=0x0000020632930000
+R12=0x0000000000000000, R13=0x00007fff38d66d90, R14=0x0000000000010000, R15=0x0000000000003224
+RIP=0x00007fff6565cef9, EFLAGS=0x0000000000010203
+
+Top of Stack: (sp=0x000000221c1ff4e8)
+0x000000221c1ff4e8:   00007fff38de6840 0000020632c41070
+0x000000221c1ff4f8:   0000020600000000 0000020632c602a4
+0x000000221c1ff508:   000002063298bc00 0000000000010000
+0x000000221c1ff518:   000000221c1ff534 000000221c1ff7b0
+0x000000221c1ff528:   0000000000000104 03e706ff00000101
+0x000000221c1ff538:   00000000000000ff 000000000000000d
+0x000000221c1ff548:   0000000000000000 0000000000000000
+0x000000221c1ff558:   0000000000000090 0000000000002000
+0x000000221c1ff568:   0000020632950000 0000020632c5de80
+0x000000221c1ff578:   00007fff7e5b2524 6e9a18bb00000000
+0x000000221c1ff588:   00007fff7e5aec14 00000206005c3a43
+0x000000221c1ff598:   00000000000000e7 0000020632b20000
+0x000000221c1ff5a8:   00007fff7e6ea460 0000020632950150
+0x000000221c1ff5b8:   00000000000003ff 00000000000000e7
+0x000000221c1ff5c8:   00007fff7e5aeb04 0000000000000000
+0x000000221c1ff5d8:   8b3ee96759a217d3 000000000000000d 
+
+Instructions: (pc=0x00007fff6565cef9)
+0x00007fff6565ced9:   f8 80 00 00 00 77 30 0f ba 25 38 53 00 00 02 0f
+0x00007fff6565cee9:   83 82 00 00 00 8b c2 48 8b d7 48 8b f9 49 8b c8
+0x00007fff6565cef9:   f3 aa 48 8b fa 49 8b c3 c3 66 66 66 66 66 66 0f
+0x00007fff6565cf09:   1f 84 00 00 00 00 00 0f ba 25 08 53 00 00 01 72 
+
+
+
+---------------  P R O C E S S  ---------------
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+
+[error occurred during error reporting (printing compressed oops mode), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007fff38ed3b67]
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff75ed80000 - 0x00007ff75edc7000 	C:\Program Files\Java\jdk-11.0.1\bin\java.exe
+0x00007fff7e590000 - 0x00007fff7e771000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007fff7bbd0000 - 0x00007fff7bc82000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007fff7b360000 - 0x00007fff7b5d3000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007fff7c230000 - 0x00007fff7c2d1000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007fff7bf40000 - 0x00007fff7bfde000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007fff7bfe0000 - 0x00007fff7c03b000 	C:\WINDOWS\System32\sechost.dll
+0x00007fff7c460000 - 0x00007fff7c584000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007fff7c0a0000 - 0x00007fff7c230000 	C:\WINDOWS\System32\USER32.dll
+0x00007fff7a9b0000 - 0x00007fff7a9d0000 	C:\WINDOWS\System32\win32u.dll
+0x00007fff7be90000 - 0x00007fff7beb8000 	C:\WINDOWS\System32\GDI32.dll
+0x00007fff7a9d0000 - 0x00007fff7ab62000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007fff7b790000 - 0x00007fff7b82f000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007fff7b5e0000 - 0x00007fff7b6da000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007fff65790000 - 0x00007fff659f9000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.17134.590_none_fb3d9bff3069e088\COMCTL32.dll
+0x00007fff75230000 - 0x00007fff7523a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007fff7c890000 - 0x00007fff7cbb2000 	C:\WINDOWS\System32\combase.dll
+0x00007fff7ab70000 - 0x00007fff7abea000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007fff7bca0000 - 0x00007fff7bccd000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007fff65650000 - 0x00007fff65666000 	C:\Program Files\Java\jdk-11.0.1\bin\vcruntime140.dll
+0x00007fff61ff0000 - 0x00007fff6209a000 	C:\Program Files\Java\jdk-11.0.1\bin\msvcp140.dll
+0x00007fff38780000 - 0x00007fff392c2000 	C:\Program Files\Java\jdk-11.0.1\bin\server\jvm.dll
+0x00007fff7e550000 - 0x00007fff7e558000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007fff672e0000 - 0x00007fff672e9000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007fff77720000 - 0x00007fff77743000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007fff7cbc0000 - 0x00007fff7cc2c000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007fff776f0000 - 0x00007fff7771a000 	C:\WINDOWS\SYSTEM32\WINMMBASE.dll
+0x00007fff7a960000 - 0x00007fff7a9a9000 	C:\WINDOWS\System32\cfgmgr32.dll
+0x00007fff7a940000 - 0x00007fff7a951000 	C:\WINDOWS\System32\kernel.appcore.dll
+0x00007fff65630000 - 0x00007fff65641000 	C:\Program Files\Java\jdk-11.0.1\bin\verify.dll
+0x00007fff6a6e0000 - 0x00007fff6a8a9000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+0x00007fff69620000 - 0x00007fff69649000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
+0x00007fff64c50000 - 0x00007fff64c79000 	C:\Program Files\Java\jdk-11.0.1\bin\java.dll
+0x00007fff62a40000 - 0x00007fff62a6f000 	C:\Program Files\Java\jdk-11.0.1\bin\instrument.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\Java\jdk-11.0.1\bin;C:\WINDOWS\SYSTEM32;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.17134.590_none_fb3d9bff3069e088;C:\Program Files\Java\jdk-11.0.1\bin\server
+
+VM Arguments:
+jvm_args: -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.2.2\lib\idea_rt.jar=54574:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.2.2\bin -Dfile.encoding=UTF-8 
+java_command: Main
+java_class_path (initial): D:\MSPR Java\java_mspr\target\classes;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk\1.11.489\aws-java-sdk-1.11.489.jar;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk-worklink\1.11.489\aws-java-sdk-worklink-1.11.489.jar;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk-backup\1.11.489\aws-java-sdk-backup-1.11.489.jar;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk-docdb\1.11.489\aws-java-sdk-docdb-1.11.489.jar;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk-apigatewayv2\1.11.489\aws-java-sdk-apigatewayv2-1.11.489.jar;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk-apigatewaymanagementapi\1.11.489\aws-java-sdk-apigatewaymanagementapi-1.11.489.jar;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk-kafka\1.11.489\aws-java-sdk-kafka-1.11.489.jar;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk-appmesh\1.11.489\aws-java-sdk-appmesh-1.11.489.jar;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk-licensemanager\1.11.489\aws-java-sdk-licensemanager-1.11.489.jar;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk-securityhub\1.11.489\aws-java-sdk-securityhub-1.11.489.jar;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk-fsx\1.11.489\aws-java-sdk-fsx-1.11.489.jar;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk-mediaconnect\1.11.489\aws-java-sdk-mediaconnect-1.11.489.jar;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk-kinesisanalyticsv2\1.11.489\aws-java-sdk-kinesisanalyticsv2-1.11.489.jar;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk-comprehendmedical\1.11.489\aws-java-sdk-comprehendmedical-1.11.489.jar;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk-globalaccelerator\1.11.489\aws-java-sdk-globalaccelerator-1.11.489.jar;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk-transfer\1.11.489\aws-java-sdk-transfer-1.11.489.jar;C:\Users\ronan\.m2\repository\com\amazonaws\aws-java-sdk-datasync\1.11.489\aws-java-sdk-datasync-1.
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     uint G1ConcRefinementThreads                  = 10                                        {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 131633984                                 {product} {ergonomic}
+   size_t MaxHeapSize                              = 2106143744                                {product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     bool UseCompressedClassPointers               = true                                 {lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                                 {lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk-10.0.2
+PATH=C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\nodejs\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\PuTTY\;C:\Program Files\Git\cmd;C:\Program Files\Git\bin\git.exe;;C:\Program Files (x86)\Gpg4win\..\GnuPG\bin;C:\Program Files\Amazon\AWSCLI\bin\;C:\Users\ronan\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Java\jdk-10.0.2\bin;C:\Users\ronan\AppData\Roaming\npm;C:\Program Files\nodejs;C:\Users\ronan\AppData\Local\atom\bin;C:\Users\ronan\AppData\Local\GitHubDesktop\bin
+USERNAME=ronan
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10 , 64 bit Build 17134 (10.0.17134.556)
+
+CPU:total 12 (initial active 12) 
+
+Memory: 4k page, system-wide physical 8034M (2098M free)
+TotalPageFile size 19810M (AvailPageFile size 6771M)
+current process WorkingSet (physical memory assigned to process): 8M, peak: 8M
+current process commit charge ("private bytes"): 3M, peak: 3M
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (11.0.1+13-LTS) for windows-amd64 JRE (11.0.1+13-LTS), built on Oct  6 2018 13:20:16 by "mach5one" with MS VC++ 15.5 (VS2017)
+
+END.
